@@ -1,0 +1,13 @@
+simple-website/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/
+│   │   │       └── example/
+│   │   │           └── website/
+│   │   ├── resources/
+│   │   │   ├── static/
+│   │   │   └── templates/
+│   │   └── webapp/
+│   └── test/
+└── pom.xml 
