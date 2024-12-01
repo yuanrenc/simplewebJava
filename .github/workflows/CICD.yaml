@@ -46,3 +46,32 @@ jobs:
             echo "Webpage did not return status code 200. Response: $response"
             exit 1  # Fail the job if the status is not 200
           fi
+
+  upload_to_docker_hub:
+    runs-on: ubuntu-latest
+    needs: deploy_website
+    env:
+      DOCKER_HUB_NAME: "colinwang847"
+      DOCKER_HUB_APP: "reactapp"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ./my-app
+          push: true
+          tags: ${{env.DOCKER_HUB_NAME}}/${{env.DOCKER_HUB_APP}}:${{ github.sha }}
