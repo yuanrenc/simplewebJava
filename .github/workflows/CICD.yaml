@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17' # Specify the Java version for your app
-          distribution: 'adoptopenjdk'
+          distribution: oracle
           cache: maven
 
       - name: Run tests with Maven
