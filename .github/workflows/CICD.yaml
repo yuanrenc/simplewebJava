@@ -72,6 +72,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: ./my-app
+          context: .
           push: true
           tags: ${{env.DOCKER_HUB_NAME}}/${{env.DOCKER_HUB_APP}}:${{ github.sha }}
